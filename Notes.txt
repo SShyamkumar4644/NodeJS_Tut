@@ -255,9 +255,70 @@ fs.readFile('file.txt', 'utf8', (err, data) =>{
 PS E:\NodeJS_Tutorials_CWH> node fsmodule.js
 null This is a file
 
+//NOTICE HERE
+const fs = require('fs');
+
+fs.readFile('file.txt', 'utf8', (err, data) =>{
+    console.log(err, data)
+})
+ 
+console.log("Finished reading file")
+
+//BUT YOU get Finished reading file PRINTED First, WHY?
+//CAUSE READING THE FILE MIGHT TAKE TIME, SO Finished reading file IS PRINTED
+//TILL THEN YOU PRINT YOURSELF, DON'T DELAY YOURSELF
+PS E:\NodeJS_Tutorials_CWH> node fsmodule.js
+Finished reading file
+null This is a file
+
+//IF YOU WANT FILE CONTENT TO BE PRINTED FIRST THEN PUT LIKE This
+//fsmodule.js
+const fs = require('fs');
+
+// fs.readFile('file.txt', 'utf8', (err, data) =>{
+//     console.log(err, data)
+// })
+
+const a = fs.readFileSync('file.txt')
+console.log(a.toString())
+
+console.log("Finished reading file")
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node fsmodule.js
+This is a file
+Finished reading file
+
+//TILL HERE WAS READ FILE, NEXT WE WILL SEE WRITE FILE
+
+//fsmodule.txt
+const fs = require('fs');
+
+// fs.readFile('file.txt', 'utf8', (err, data) =>{
+//     console.log(err, data)
+// })
+
+// const a = fs.readFileSync('file.txt')
+// console.log(a.toString())
+
+fs.writeFile('file2.txt', 'This is a data', () =>{
+    console.log('Written to the file')
+});
+
+console.log("Finished reading file")
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node fsmodule.js
+Finished reading file
+Written to the file
+
+//STUDY CALLBACKS, PROMISES IN JAVASCRIPT TOPICS
 
 
-41 mins done
+
+
+
+48 mins done
 
 
 
