@@ -183,7 +183,81 @@ PS E:\NodeJS_Tutorials_CWH> node osmodules.js
 1305972736
 C:\Users\hp
 
-31 mins done
+const os = require('os');
+
+console.log(os.freemem())
+
+console.log(os.homedir())
+
+console.log(os.hostname())
+
+console.log(os.platform())
+
+console.log(os.release()) // version
+
+console.log(os.type()) type of windows
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node osmodules.js
+894353408
+C:\Users\hp
+LAPTOP-I5AJ3H5N
+win32
+10.0.19044
+Windows_NT
+
+21. Next is path module, create pathmodule.js file
+//In pathmodule.js file
+const path = require('path');
+
+const a = path.basename("C:\\temp\\myfile.html");
+console.log(a);
+
+//execute 
+PS E:\NodeJS_Tutorials_CWH> node pathmodule.js
+myfile.html
+
+//In pathmodule.js
+const path = require('path');
+
+const a1 = path.basename("C:\\temp\\myfile.html");
+const a2 = path.dirname("C:\\temp\\myfile.html");
+console.log(a1, a2);
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node pathmodule.js
+myfile.html C:\temp
+
+//In pathmodule.js
+const path = require('path');
+
+const a1 = path.basename("C:\\temp\\myfile.html"); filename
+const a2 = path.dirname("C:\\temp\\myfile.html"); //current directory
+const a3 = path.extname(__filename); //extension of the file name
+console.log(a1, a2, a3);
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node pathmodule.js
+myfile.html C:\temp .js
+
+22. Next is File modules
+Refer the docs: https://nodejs.org/api/fs.html
+
+Create file.txt file and 
+//In fsmodules.txt
+const fs = require('fs');
+
+fs.readFile('file.txt', 'utf8', (err, data) =>{
+    console.log(err, data)
+})
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node fsmodule.js
+null This is a file
+
+
+
+41 mins done
 
 
 
