@@ -1,0 +1,192 @@
+1. First step is about create index.js file
+
+2. Then type console.log("hello world")
+
+3. And to execute the file, in terminal type node index.js
+
+4. Check Node version node --version and npm --version, npm is for package installations
+purposes similar like pip install in python
+
+5. We created index.js file, we want to create a simple project and want to
+initialise as node project for that in terminal type npm init
+
+6. You will get to enter values, type enter till end or add name if you want
+
+7. After that you will get package.json file
+
+8. You can install express package, npm install express, and it will go to dependencies\
+section in package.json file
+
+9. After express is installed you will get node_modules folders which is large files
+you can delete also for example, and if you want to reinstall you can npm install
+and node_modules will be reinstalled. node_modules folders are downloaded from internet
+which can be used in your project.
+
+10. You can install nodemon, which will help to run the server when edited the file
+on the go. Add script tag "start": "nodemon index.js"
+
+{
+  "name": "harry",
+  "version": "1.0.0",
+  "description": "Amazing package",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harry",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.20"
+  }
+}
+
+And to execute the file type npm run start and you will get output
+
+11. You can delete packages npm uninstall package_name
+
+12. Install npm install @angular/cli
+
+13. Package.Json file will have packages list installed for the project
+
+14. package.json vs package-lock.json
+
+15. Now you have only index.js file, you want to create another second.js file and
+access from index.js file by imprt export methods
+
+//index.js
+const harry = require("./second");
+
+console.log("Hello world", harry)
+
+//second.js
+harry = {
+    name:"harry",
+    favNum: 36,
+    developer: true
+}
+
+module.exports = harry;
+
+// you will get output when you executeby npm run start
+[nodemon] clean exit - waiting for changes before restart
+[nodemon] restarting due to changes...
+[nodemon] starting `node index.js`
+[nodemon] restarting due to changes...
+Hello world { name: 'harry', favNum: 36, developer: true }
+[nodemon] starting `node index.js`
+Hello world { name: 'harry', favNum: 36, developer: true }
+[nodemon] clean exit - waiting for changes before restart
+
+
+16. Module wrapper functions
+
+//Wrap like this
+(function(exports, require, module, __filename, __dirname){
+    harry = {
+        name:"harry",
+        favNum: 36,
+        developer: true
+    }
+    module.exports = harry;
+
+})
+
+//To check what is these terms 
+// (function(exports, require, module, __filename, __dirname){
+
+    harry = {
+        name:"harry",
+        favNum: 36,
+        developer: true
+    }
+
+    console.log(exports, require, module, __filename, __dirname)
+    
+    module.exports = harry;
+
+// })
+npm run start you will get below output
+PS E:\NodeJS_Tutorials_CWH> npm run start
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+> harry@1.0.0 start
+> nodemon index.js
+
+[nodemon] 2.0.20
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node index.js`
+{} [Function: require] {
+  resolve: [Function: resolve] { paths: [Function: paths] },
+  main: Module {
+    id: '.',
+    path: 'E:\\NodeJS_Tutorials_CWH',
+    exports: {},
+    filename: 'E:\\NodeJS_Tutorials_CWH\\index.js',
+    loaded: false,
+    children: [ [Module] ],
+    paths: [ 'E:\\NodeJS_Tutorials_CWH\\node_modules', 'E:\\node_modules' ]   
+  },
+  extensions: [Object: null prototype] {
+    '.js': [Function (anonymous)],
+    '.json': [Function (anonymous)],
+    '.node': [Function (anonymous)]
+  },
+  cache: [Object: null prototype] {
+    'E:\\NodeJS_Tutorials_CWH\\index.js': Module {
+      id: '.',
+      path: 'E:\\NodeJS_Tutorials_CWH',
+      exports: {},
+      filename: 'E:\\NodeJS_Tutorials_CWH\\index.js',
+      loaded: false,
+      children: [Array],
+      paths: [Array]
+    },
+    'E:\\NodeJS_Tutorials_CWH\\second.js': Module {
+      id: 'E:\\NodeJS_Tutorials_CWH\\second.js',
+      path: 'E:\\NodeJS_Tutorials_CWH',
+      exports: {},
+      filename: 'E:\\NodeJS_Tutorials_CWH\\second.js',
+      loaded: false,
+      children: [],
+      paths: [Array]
+    }
+  }
+} Module {
+  id: 'E:\\NodeJS_Tutorials_CWH\\second.js',
+  path: 'E:\\NodeJS_Tutorials_CWH',
+  exports: {},
+  filename: 'E:\\NodeJS_Tutorials_CWH\\second.js',
+  loaded: false,
+  children: [],
+  paths: [ 'E:\\NodeJS_Tutorials_CWH\\node_modules', 'E:\\node_modules' ]     
+} E:\NodeJS_Tutorials_CWH\second.js E:\NodeJS_Tutorials_CWH
+Hello world { name: 'harry', favNum: 36, developer: true }
+[nodemon] clean exit - waiting for changes before restart
+
+17. Go to Nodejs docs in google we will see, what is osmodules
+
+18. Create a file osmodules.js and type const os = require('os');
+os is built in module so you can type the above line of code
+
+19. Now you can use any os methods lets say console.log(os.freemem())
+an check the output you will get 
+PS E:\NodeJS_Tutorials_CWH> node osmodules.js
+1433235456
+
+20. Another method console.log(os.homedir())
+Output for that will show your current directory
+PS E:\NodeJS_Tutorials_CWH> node osmodules.js
+1305972736
+C:\Users\hp
+
+31 mins done
+
+
+
+
+
+
