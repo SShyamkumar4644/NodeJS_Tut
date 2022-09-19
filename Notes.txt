@@ -314,11 +314,268 @@ Written to the file
 
 //STUDY CALLBACKS, PROMISES IN JAVASCRIPT TOPICS
 
+NEXT
+//writefileSync
+const fs = require('fs');
+
+// fs.readFile('file.txt', 'utf8', (err, data) =>{
+//     console.log(err, data)
+// })
+
+// const a = fs.readFileSync('file.txt')
+// console.log(a.toString())
+
+// fs.writeFile('file2.txt', 'This is a data', () =>{
+//     console.log('Written to the file')
+// });
+
+b = fs.writeFileSync('file2.txt', 'This is a data2')
+console.log(b)
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node fsmodule.js
+undefined
+Finished reading file
+
+console.log("Finished reading file")
+
+//NEXT TOPIC COMMON JS MODULES
+//CREATE 2 FILES modulefirst.js and modulesecond.js
+//modulefirst.js
+const simple = require("./modulesecond")
+
+simple()
+
+//modulesecond.js
+function simple(){
+    console.log("SIMPLE")
+}
+
+module.exports = simple;
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+SIMPLE
+
+//MJS extension ES6 VERSIONS
+NOW RENAME MODULESECOND.JS TO MODULESECOND.MJS
+
+//now modulesecond.mjs file
+export function simple(){
+    console.log("SIMPLE IS COMPLEX")
+}
+
+// module.exports = simple;
+
+//modulefirst.js
+// const simple = require("./modulesecond")
+import {simple} from "./modulesecond.mjs"
+
+simple()
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+(node:13848) Warning: To load an ES module, set "type": "module" in the package.json or use the .mjs extension.
+(Use `node --trace-warnings ...` to show where the warning was created)       
+E:\NodeJS_Tutorials_CWH\modulefirst.js:2
+import simple from "./modulesecond"
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at Object.compileFunction (node:vm:352:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1033:15)
+    at Module._compile (node:internal/modules/cjs/loader:1069:27)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)        
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+    at node:internal/main/run_main_module:17:47
+PS E:\NodeJS_Tutorials_CWH>
+//YOU WILL GET ERROR LIKE THE ABOVE FOR THAT GO TO PACKAGE.JSON FILE, AND Add
+"type": "module", below author section
+//Package.json
+{
+  "name": "harry",
+  "version": "1.0.0",
+  "description": "Amazing package",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harry",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/cli": "^14.2.3",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.20"
+  }
+}
+
+//AFTER THIS YOUR OUTPUT WILL BE 
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+SIMPLE IS COMPLEX
+
+//YOU CAN CREATE 2 FUNCTIONS AS CALL BY THE SAME name
+//modulefirst.JS
+// const simple = require("./modulesecond")
+import {simple2 as simple} from "./modulesecond.mjs"
+
+simple()
+
+//modulesecond.mjs
+export function simple(){
+    console.log("SIMPLE IS COMPLEX")
+}
+
+export function simple2(){
+    console.log("SIMPLE2 IS COMPLEX")
+}
+
+// module.exports = simple;
+
+//OUTPUT
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+SIMPLE2 IS COMPLEX
+
+//BUT 
+//modulefirst.JS
+// const simple = require("./modulesecond")
+// import {simple2 as simple} from "./modulesecond.mjs"
+import simple2 from "./modulesecond.mjs"
+
+simple2()
+
+//modulesecond.mjs
+export function simple(){
+    console.log("SIMPLE IS COMPLEX")
+}
+
+export function simple2(){
+    console.log("SIMPLE2 IS COMPLEX")
+}
 
 
+// module.exports = simple;
+
+//YOU WILL GET ERROR
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+file:///E:/NodeJS_Tutorials_CWH/modulefirst.js:3
+import simple2 from "./modulesecond.mjs"
+       ^^^^^^^
+SyntaxError: The requested module './modulesecond.mjs' does not provide an export named 'default'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:128:21)    
+    at async ModuleJob.run (node:internal/modules/esm/module_job:194:5)        
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:385:24)        
+    at async loadESM (node:internal/process/esm_loader:88:5)
+    at async handleMainPromise (node:internal/modules/run_main:61:12)
+PS E:\NodeJS_Tutorials_CWH>
+
+//FOR THAT IN MODULESECOND.MJS
+export function simple(){
+    console.log("SIMPLE IS COMPLEX")
+}
+
+// export function simple2(){
+//     console.log("SIMPLE2 IS COMPLEX")
+// }
+
+export default function simple2(){
+    console.log("SIMPLE2 IS COMPLEX")
+}
 
 
-48 mins done
+// module.exports = simple;
+
+//OUTPUT
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+SIMPLE2 IS COMPLEX
+
+//NOW
+//modulefirst.JS
+// const simple = require("./modulesecond")
+// import {simple2 as simple} from "./modulesecond.mjs"
+// import simple2 from "./modulesecond.mjs"
+// import {simple, simple2} from "./modulesecond.mjs"
+
+// simple2()
+
+import * as a2 from "./modulesecond.mjs"
+
+// simple2()
+console.log(a2)
+
+//MODULESECOND.MJS
+export function simple(){
+    console.log("SIMPLE IS COMPLEX")
+}
+
+// export function simple2(){
+//     console.log("SIMPLE2 IS COMPLEX")
+// }
+
+export default function simple2(){
+    console.log("SIMPLE2 IS COMPLEX")
+}
+
+
+// module.exports = simple;
+
+//OUTPUT OF a2
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+[Module: null prototype] {
+  default: [Function: simple2],
+  simple: [Function: simple]
+}
+
+//NOW IF YOU WANT TO RETURN THE values
+//modulefirst.JS
+// const simple = require("./modulesecond")
+// import {simple2 as simple} from "./modulesecond.mjs"
+// import simple2 from "./modulesecond.mjs"
+// import {simple, simple2} from "./modulesecond.mjs"
+
+// simple2()
+
+import * as a2 from "./modulesecond.mjs"
+
+// simple2()
+console.log(a2.simple())
+
+//MODULESECOND.MJS
+export function simple(){
+    console.log("SIMPLE IS COMPLEX")
+    return 45;
+}
+
+// export function simple2(){
+//     console.log("SIMPLE2 IS COMPLEX")
+// }
+
+export default function simple2(){
+    console.log("SIMPLE2 IS COMPLEX")
+}
+
+
+// module.exports = simple;
+
+//OUTPUT
+//BEFORE RETURN Function
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+SIMPLE IS COMPLEX
+undefined
+
+//AFTER RETURN Function
+PS E:\NodeJS_Tutorials_CWH> node modulefirst.js
+SIMPLE IS COMPLEX
+45
+
+//URL MODULES
+
+
+1 hr done
 
 
 
