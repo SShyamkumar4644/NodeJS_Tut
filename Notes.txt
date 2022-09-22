@@ -81,7 +81,7 @@ Hello world { name: 'harry', favNum: 36, developer: true }
 
 
 16. Module wrapper functions
-
+//second.js
 //Wrap like this
 (function(exports, require, module, __filename, __dirname){
     harry = {
@@ -183,6 +183,7 @@ PS E:\NodeJS_Tutorials_CWH> node osmodules.js
 1305972736
 C:\Users\hp
 
+//osmodules.js
 const os = require('os');
 
 console.log(os.freemem())
@@ -573,9 +574,187 @@ SIMPLE IS COMPLEX
 45
 
 //URL MODULES
+//urlmodule.js file
+import url from 'url';
+const myURL = new URL('https://example.org');
+myURL.pathname = '/a/b/c';
+myURL.search = '?d=e';
+myURL.hash = '#fgh';
+
+console.log(myURL)
+
+//output
+PS E:\NodeJS_Tutorials_CWH> node urlmodule.js  
+URL {
+  href: 'https://example.org/a/b/c?d=e#fgh',   
+  origin: 'https://example.org',
+  protocol: 'https:',
+  username: '',
+  password: '',
+  host: 'example.org',
+  hostname: 'example.org',
+  port: '',
+  pathname: '/a/b/c',
+  search: '?d=e',
+  searchParams: URLSearchParams { 'd' => 'e' },
+  hash: '#fgh'
+}
+
+//EVENTS IN NodeJS
+//create nodeevents.js file
+const EventEmitter = require('events');
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+myEmitter.on('Waterfull', () => {
+  console.log('Please turn off the motor!');
+  setTimeout(() =>{
+    console.log('Please turn off the motor! a gentle reminder');
+  }, 3000);//3 second
+});//this will run when event fires up
+myEmitter.emit('event');
+
+//when you execute you will get error
+file:///E:/NodeJS_Tutorials_CWH/nodeevents.js:1
+const EventEmitter = require('events');
+                     ^
+
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and 'E:\NodeJS_Tutorials_CWH\package.json' contains "type": "module". To treat it as a CommonJS script, rename 
+it to use the '.cjs' file extension.
+    at file:///E:/NodeJS_Tutorials_CWH/nodeevents.js:1:22
+    at ModuleJob.run (node:internal/modules/esm/module_job:198:25)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:385:24)
+    at async loadESM (node:internal/process/esm_loader:88:5)
+    at async handleMainPromise (node:internal/modules/run_main:61:12)
+
+// for that error go to package.json and remove type:module;
+Now when you execute, you get nothing cause you didnt create waterfull event
+for that
+//nodeevents.js
+const EventEmitter = require('events');
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+myEmitter.on('Waterfull', () => {
+  console.log('Please turn off the motor!');
+  setTimeout(() =>{
+    console.log('Please turn off the motor! a gentle reminder');
+  }, 3000);//3 second
+});//this will run when event fires up
+myEmitter.emit('event');
+
+console.log("this script is running")
+console.log("this script is still running")
+myEmitter.emit('Waterfull');
+
+//add last 3 lines of code
 
 
-1 hr done
+//Output
+PS E:\NodeJS_Tutorials_CWH> node nodeevents.js
+this script is running
+this script is still running
+Please turn off the motor!
+Please turn off the motor! a gentle reminder
+
+//EVEN LAST 3 LINES OF CODE MODIFIED LIKE THIS
+console.log("this script is running")
+myEmitter.emit('Waterfull');
+console.log("this script is still running")
+
+//OUTPUT
+PS E:\NodeJS_Tutorials_CWH> node nodeevents.js
+this script is running
+Please turn off the motor!
+this script is still running
+Please turn off the motor! a gentle reminder
+
+//HERE setTimeout DOESNT BLOCK, LETS OTHER TO RUN IF THERE ARE PROCESSES
+
+//THESE ARE USED IN REAL TIME CHAT APPILCATIONS, ETC, ZOOM CALLS WHEN SOMEONE, JOINS
+THE MEETING POP UP THE MESSAGE
+
+//NEXT TOPIC IS HTTP MODULES
+//httpmodule.js
+const http = require('http');
+
+const port = process.env.PORT || 3000;
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html')
+    res.end('<h1> This is CodewithHarry </h1> <p> This is nice </p>')
+})
+
+server.listen(port, () =>{
+    console.log(`Server is listening on port ${port}`)
+});
+
+//Output
+PS E:\NodeJS_Tutorials_CWH> node httpmodule.js
+Server is listening on port 3000
+//Check in edge browser for output
+Right click inspect element, click on network, refresh the page and you get 
+localhost and 
+below are the contents you will see on right side of localhost tab in network
+Request URL: http://localhost:3000/
+Request Method: GET
+Status Code: 200 OK
+Remote Address: [::1]:3000
+Referrer Policy: strict-origin-when-cross-origin
+Connection: keep-alive
+Content-Length: 54
+Content-Type: text/html
+Date: Thu, 22 Sep 2022 07:44:23 GMT
+Keep-Alive: timeout=5
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cache-Control: max-age=0
+Connection: keep-alive
+DNT: 1
+Host: localhost:3000
+sec-ch-ua: "Microsoft Edge";v="105", " Not;A Brand";v="99", "Chromium";v="105"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/105.0.1343.42
+
+//httpmodule.js
+const http = require('http');
+
+const port = process.env.PORT || 3000;
+//Here either check with ports available or run with 3000 port
+
+const server = http.createServer((req, res) => {
+    console.log(req.url) // put this code
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html')
+    res.end('<h1> This is CodewithHarry </h1> <p> This is nice </p>')
+})
+
+server.listen(port, () =>{
+    console.log(`Server is listening on port ${port}`)
+});
+
+//Output
+In browser type anything in url you will get
+http://localhost:3000/This is nice
+
+PS E:\NodeJS_Tutorials_CWH> node httpmodule.js
+Server is listening on port 3000
+/This%20is%20nice
+/favicon.ico
+
+1:18 mins done
 
 
 
