@@ -754,7 +754,244 @@ Server is listening on port 3000
 /This%20is%20nice
 /favicon.ico
 
-1:18 mins done
+
+//NEXT TOPIC LETS CREATE WEBSITE
+//Create WEBSITE.JS FILE
+//COPY THE CODE OF HTTPSERVER.JS AND PASTE IN WEBSITE.JS FILE AND MODIFY
+const http = require('http');
+
+const port = process.env.PORT || 3000;
+//Here either check with ports available or run with 3000 port
+
+const server = http.createServer((req, res) => {
+    console.log(req.url)
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html')
+
+    if(req.url == '/'){
+        res.end('<h1> This is CodewithHarry </h1> <p> This is nice </p>');
+    }
+    else if(req.url == '/about'){
+        res.end('<h1> About CodewithHarry </h1> <p> This is About </p>');
+    }
+})
+
+server.listen(port, () =>{
+    console.log(`Server is listening on port ${port}`)
+});
+
+//OUTPUT
+Server is listening on port 3000
+/
+/favicon.ico
+/about
+/favicon.ico
+//CHECK IN EDGE BROWSER RUN LOCALHOST:3000, AND PUT /ABOUT AND YOU WILL GET Content
+//OF THAT PAGE
+
+//website.js
+const http = require('http');
+
+const port = process.env.PORT || 3000;
+//Here either check with ports available or run with 3000 port
+
+const server = http.createServer((req, res) => {
+    console.log(req.url)
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html')
+
+    if(req.url == '/'){
+        res.statusCode = 200;
+        res.end('<h1> This is CodewithHarry </h1> <p> This is nice </p>');
+    }
+    else if(req.url == '/about'){
+        res.statusCode = 200;
+        res.end('<h1> About CodewithHarry </h1> <p> This is About </p>');
+    }
+    else{
+        res.statusCode = 400;
+        res.end('<h1> Not Found </h1> <p> This page was not found </p>');
+    }
+})
+
+server.listen(port, () =>{
+    console.log(`Server is listening on port ${port}`)
+});
+
+//OUTPUT
+HERE WE HAVE CREATED ELSE CONDITION WHERE IF YOU HIT OTHER THAN DEFAULT AND ABOUT
+PAGE THEN IT WILL SHOW PAGE WAS NOT FOUND IN TEXT FORMAT
+
+//INSTALL NODEMON GLOBALLY
+//EXCEUTE COMMAND npx nodemon website.js AND IT WILL RUN THE FILE
+
+//NEXT IS THAT WE WILL CREATE INDEX.HTML FILE (EXPRESS CONCEPT)
+LINK: https://getbootstrap.com/docs/5.2/components/accordion/ (COPY PASTE THE CODE)
+//WEBSITE.JS FILE
+const  fs  = require('fs');
+const http = require('http');
+
+const port = process.env.PORT || 3000;
+//Here either check with ports available or run with 3000 port
+
+const server = http.createServer((req, res) => {
+    console.log(req.url)
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html')
+
+    if(req.url == '/'){
+        res.statusCode = 200;
+        res.end('<h1> This is CodewithHarry </h1> <p> This is nice </p>');
+    }
+    else if(req.url == '/about'){
+        res.statusCode = 200;
+        res.end('<h1> About CodewithHarry </h1> <p> This is About </p>');
+    }
+    else if(req.url == '/hello'){
+        res.statusCode = 200;
+        const data = fs.readFileSync('index.html');
+        res.end(data.toString());
+    }
+    else{
+        res.statusCode = 400;
+        res.end('<h1> Not Found </h1> <p> This page was not found </p>');
+    }
+})
+
+server.listen(port, () =>{
+    console.log(`Server is listening on port ${port}`)
+});
+
+//PUT ANOTHER ELSE IF CONDITION THAT WHEN YOU HIT /HELLO IT MUST DISPLAY THE WEBSITE 
+//DISPLAY WITH READFILESYNC METHOD AND WITH TOSTRING METHOD THE CONTENT IS DISPLAYED
+
+//INDEX.HTML
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Accordion Item #1
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <strong>This is the first item's accordion body.</strong> It is
+            shown by default, until the collapse plugin adds the appropriate
+            classes that we use to style each element. These classes control the
+            overall appearance, as well as the showing and hiding via CSS
+            transitions. You can modify any of this with custom CSS or
+            overriding our default variables. It's also worth noting that just
+            about any HTML can go within the <code>.accordion-body</code>,
+            though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            Accordion Item #2
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingTwo"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <strong>This is the second item's accordion body.</strong> It is
+            hidden by default, until the collapse plugin adds the appropriate
+            classes that we use to style each element. These classes control the
+            overall appearance, as well as the showing and hiding via CSS
+            transitions. You can modify any of this with custom CSS or
+            overriding our default variables. It's also worth noting that just
+            about any HTML can go within the <code>.accordion-body</code>,
+            though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            Accordion Item #3
+          </button>
+        </h2>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingThree"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is
+            hidden by default, until the collapse plugin adds the appropriate
+            classes that we use to style each element. These classes control the
+            overall appearance, as well as the showing and hiding via CSS
+            transitions. You can modify any of this with custom CSS or
+            overriding our default variables. It's also worth noting that just
+            about any HTML can go within the <code>.accordion-body</code>,
+            though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+//IN NODEJS THIS WAY FOR CONNECTING THE WEBSITE, REQUIRE MANY STATEMENTS AND ALL,
+//IN OPTIMISED WAY, WE CAN USE EXPRESS FRAMEWORK, NPM INSTALL EXPRESS
+//BY THE WAY ANGULAR/CLI IS NOT REQUIRED JUST FOR SHOWCASE WAS DONE
+
+Resources:
+Learn NodeJS: https://nodejs.dev/en/learn/
+
+1:30 mins done
 
 
 
